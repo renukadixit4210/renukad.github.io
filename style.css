@@ -62,8 +62,11 @@ img { max-width: 100%; display: block; }
 
 /* ══ BG CANVAS — bioluminescent neural network ══ */
 #bg-canvas {
-  position: fixed; inset: 0; z-index: 0;
-  pointer-events: none; opacity: 0.72;
+  position: fixed;
+  inset: 0;
+  z-index: -1;        /* FIX */
+  pointer-events: none;
+  opacity: 0.9;       /* stronger */
 }
 
 /* vignette — darkens edges so network fades into the page naturally */
