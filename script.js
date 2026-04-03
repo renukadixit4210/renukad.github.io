@@ -9,8 +9,11 @@
 // BIOLUMINESCENT NEURAL NETWORK — full background system
 // Three node types · synaptic pulses · glow halos · depth
 // ══════════════════════════════════════════════════════
+document.addEventListener("DOMContentLoaded", () => {
 const bgCanvas = document.getElementById('bg-canvas');
-const bgCtx    = bgCanvas.getContext('2d');
+
+if (bgCanvas) {
+  const bgCtx = bgCanvas.getContext('2d');
 
 function resizeBg() {
   bgCanvas.width  = window.innerWidth;
@@ -117,7 +120,7 @@ class NeuralNode {
 
   draw(ctx) {
     const breath = 0.7 + 0.3 * Math.sin(this.phase);
-    const alpha  = (0.25 + this.depth * 0.45) * breath;
+   const alpha  = (0.4 + this.depth * 0.6) * breath;
     const gR     = this.r * (this.type === 'soma' ? 8 : 5);
 
     // outer ambient glow — dimmer
@@ -145,7 +148,7 @@ class NeuralNode {
 
 // ── Synapse (connection line) ─────────────────────────
 function drawSynapse(ctx, a, b, dist, maxDist) {
-  const alpha = 0.02 + 0.07 * (1 - dist / maxDist);
+  const alpha = 0.08 + 0.18 * (1 - dist / maxDist);
   const depthAlpha = alpha * (0.5 + (a.depth + b.depth) * 0.5);
 
   let color;
@@ -168,7 +171,7 @@ function drawSynapse(ctx, a, b, dist, maxDist) {
 let neuralNodes = [];
 let pulses      = [];
 const MAX_DIST  = 260;   /* wider reach = many more connections */
-const NODE_COUNT = 90;   /* more nodes = denser network */
+const NODE_COUNT = 120;   /* more nodes = denser network */
 
 function buildNetwork() {
   const w = bgCanvas.width, h = bgCanvas.height;
@@ -218,7 +221,7 @@ function drawBg() {
   requestAnimationFrame(drawBg);
 }
 drawBg();
-
+}
 
 // ── ANIMATED COUNTERS ──────────────────
 const countObserver = new IntersectionObserver(entries => {
@@ -327,8 +330,8 @@ document.querySelectorAll('.exp-card[data-id]').forEach(card => {
   card.addEventListener('click', () => openPanel(card.dataset.id));
 });
 
-epClose.addEventListener('click', closePanel);
-epOverlay.addEventListener('click', e => {
+if (epClose) {   epClose.addEventListener('click', closePanel); }
+if (epOverlay) {   epOverlay.addEventListener('click', e => {     if (e.target === epOverlay) closePanel();   }); }
   if (e.target === epOverlay) closePanel();
 });
 document.addEventListener('keydown', e => {
@@ -439,3 +442,4 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 });
+   });
