@@ -65,8 +65,7 @@ img { max-width: 100%; display: block; }
   position: fixed;
   inset: 0;
   z-index: -1;        /* FIX */
-  pointer-events: none;
-  opacity: 0.9;       /* stronger */
+  pointer-events: none; opacity: 0.85;      /* stronger */
 }
 
 /* vignette — darkens edges so network fades into the page naturally */
@@ -280,10 +279,11 @@ section {
 }
 
 /* ══ BIOLUMINESCENCE — per-section ambient glow ══ */
-#about   { background: radial-gradient(ellipse 60% 50% at 80% 30%, rgba(201,146,10,0.04) 0%, transparent 70%), rgba(5,6,10,0.82); }
-#journey { background: radial-gradient(ellipse 50% 60% at 10% 60%, rgba(155,111,224,0.05) 0%, transparent 70%), rgba(5,6,10,0.82); }
-#skills  { background: radial-gradient(ellipse 60% 40% at 90% 80%, rgba(201,146,10,0.04) 0%, transparent 70%), rgba(5,6,10,0.82); }
-#contact { background: rgba(9,11,16,0.88); }
+#about   { background: radial-gradient(ellipse 60% 50% at 80% 30%, rgba(201,146,10,0.04) 0%, transparent 70%), rgba(5,6,10,0.55); }
+#journey { background: radial-gradient(ellipse 50% 60% at 10% 60%, rgba(155,111,224,0.05) 0%, transparent 70%), rgba(5,6,10,0.55); }
+#skills  { background: radial-gradient(ellipse 60% 40% at 90% 80%, rgba(201,146,10,0.04) 0%, transparent 70%), rgba(5,6,10,0.55); }
+#contact { background: rgba(5,6,10,0.65); }
+#hero    { background: transparent; }
 .section-header { margin-bottom: 0.8rem; }
 .sh-label {
   font-family: var(--font-mono); font-size: 0.68rem;
@@ -679,10 +679,12 @@ footer {
   from { opacity: 0; } to { opacity: 1; }
 }
 .reveal {
-  opacity: 0; transform: translateY(20px);
-  transition: opacity 0.65s, transform 0.65s;
+  opacity: 0; transform: translateY(16px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  animation: revealFallback 0s 1.5s forwards;
 }
 .reveal.visible { opacity: 1; transform: translateY(0); }
+@keyframes revealFallback { to { opacity: 1; transform: translateY(0); } }
 
 /* ══ RESPONSIVE ══ */
 @media (max-width: 1100px) {
