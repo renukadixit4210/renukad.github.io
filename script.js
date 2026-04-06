@@ -330,13 +330,9 @@ document.querySelectorAll('.exp-card[data-id]').forEach(card => {
   card.addEventListener('click', () => openPanel(card.dataset.id));
 });
 
-if (epClose) {   epClose.addEventListener('click', closePanel); }
-if (epOverlay) {   epOverlay.addEventListener('click', e => {     if (e.target === epOverlay) closePanel();   }); }
-  if (e.target === epOverlay) closePanel();
-});
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') closePanel();
-});
+if (epClose)   epClose.addEventListener('click', closePanel);
+if (epOverlay) epOverlay.addEventListener('click', e => { if (e.target === epOverlay) closePanel(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closePanel(); });
 
 
 // ── DNA HELIX CANVAS ───────────────────
